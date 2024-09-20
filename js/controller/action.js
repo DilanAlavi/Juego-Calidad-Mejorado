@@ -26,42 +26,44 @@ define(["model/game", "model/canvas", "model/character", "model/images", "model/
             canvasHeight = canvas.height;
         };
 
-        var mouseClicked = function mouseClicked(down, kb) {
+        function checkButtonAction(down, kb, action) {
+            if (down && !kb) {
+                action();
+            }
+        }
+
+        function handleShooting(down) {
+            if (down && !Game.keyboard.sbFlag) {
+                Game.keyboard.sbFlag = true;
+                Action.shooting = setInterval(function () {
+                    if (Character.ship.player.hp > 0) {
+                        Action.playerShoot();
+                    }
+                }, 100);
+            } else if (!down) {
+                clearInterval(Action.shooting);
+                Game.keyboard.sbFlag = false;
+            }
+        }
+
+        const mouseClicked = function mouseClicked(down, kb) {
             Game.keyboard.use = false;
             Game.mouse.use = true;
             switch (Game.screen) {
             case "main_menu":
-                if (down && !kb) {
-                    Action.mainMenuButtonCheck();
-                }
+                checkButtonAction(down, kb, Action.mainMenuButtonCheck);
                 break;
-                case "game":
-                    if (down && !Game.keyboard.sbFlag) {					
-                        Game.keyboard.sbFlag = true;
-                        Action.shooting = setInterval(function () {
-                            if (Character.ship.player.hp > 0) {
-                                Action.playerShoot();
-                            }
-                        }, 100); 
-                    } else if (!down) {
-                        clearInterval(Action.shooting);
-                        Game.keyboard.sbFlag = false;
-                    }
-                    break;
+            case "game":
+                handleShooting(down);
+                break;
             case "game_over":
-                if (down && !kb) {
-                    Action.gameOverButtonCheck();
-                }
+                checkButtonAction(down, kb, Action.gameOverButtonCheck);
                 break;
             case "options":
-                if (down && !kb) {
-                    Action.optionsButtonCheck();
-                }
+                checkButtonAction(down, kb, Action.optionsButtonCheck);
                 break;
             case "stats":
-                if (down && !kb) {
-                    Action.statsButtonCheck();
-                }
+                checkButtonAction(down, kb, Action.statsButtonCheck);
                 break;
             }
         };
