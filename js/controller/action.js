@@ -225,7 +225,6 @@ define(["model/game", "model/canvas", "model/character", "model/images", "model/
         var playerShoot = function playerShoot() {
             var bullet, tempDamage, tempType;
             if (Game.screen === "game") {
-                var upgrade = Character.ship.player.upgrade;
                 if (!Game.muteSFX) {
                     Sounds.laser1.play();
                 }
