@@ -156,8 +156,8 @@ define(["model/game", "model/canvas", "model/character", "model/images", "model/
             }
         };
         
-        var statsButtonCheck = function statsButtonCheck() {
-            var mouseX, mouseY, part1, part2;
+        const statsButtonCheck = function statsButtonCheck() {
+            let mouseX, mouseY, part1, part2;
             part1 = Canvas.canvasWidth / 4;
             part2 = Canvas.canvasHeight / 4;
             mouseX = Game.mouse.pos.x;
