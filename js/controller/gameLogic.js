@@ -184,6 +184,21 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
                (powerUp.y >= (player.pos.y - player.height) && powerUp.y <= player.pos.y + player.height / 2);
     };
 
+    const applyPowerUp = (powerUp, player) => {
+        switch (powerUp.type) {
+            case "health":
+                player.hp += 20;
+                break;
+            case "fireRate":
+                player.fireRate -= 0.09;
+                GameLogic.fRate = true;
+                break;
+            case "damage":
+                player.damage += 1;
+                break;
+        }
+    };
+
     const checkPickUp = function checkPickUp() {
         const powerUps = InPlay.powerUps;
         const player = Character.ship.player;
