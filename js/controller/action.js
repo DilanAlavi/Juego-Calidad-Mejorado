@@ -4,7 +4,7 @@ define(["model/game", "model/canvas", "model/character", "model/images", "model/
         const getMousePos = function getMousePos(evt) {
             Game.keyboard.use = false;
             Game.mouse.use = true;
-            const rect = Canvas.canvas.getBoundingClientRect();
+            let rect = Canvas.canvas.getBoundingClientRect();
             Game.mouse.pos.x = evt.clientX - rect.left;
             Game.mouse.pos.y = evt.clientY - rect.top;
             Character.ship.player.pos.y = Game.mouse.pos.y;
@@ -69,7 +69,7 @@ define(["model/game", "model/canvas", "model/character", "model/images", "model/
             }
         };
 
-        var moveShip = function moveShip() {
+        const moveShip = function moveShip() {
             if (Game.keyboard.use) {
                 if (Game.keyboard.up) {
                     if (Character.ship.player.pos.y >= 10) {
