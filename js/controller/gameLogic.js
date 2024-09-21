@@ -119,6 +119,27 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
         }
     };
 
+    const handleEnemyBulletCollision = function(bullet, playerPos) {
+        if (
+            bullet.x >= playerPos.x - 13 &&
+            bullet.x <= playerPos.x + Character.ship.player.width &&
+            bullet.y >= playerPos.y - Character.ship.player.height / 2 &&
+            bullet.y <= playerPos.y + Character.ship.player.height / 2
+        ) {
+            if (!Game.muteSFX) {
+                Sounds.playerHit.play();
+            }
+            bullet.alive = false;
+            Character.ship.player.hp -= bullet.damage;
+            if (Character.ship.player.hp <= 0) {
+                if (!Game.muteSFX) {
+                    Sounds.explosion.play();
+                }
+                GameLogic.gameOver();
+            }
+        }
+    };
+
     const checkBulletCollision = function checkBulletCollision() {
         const enemyBullets = InPlay.enemyBullets;
         const playerPos = Character.ship.player.pos;
@@ -129,23 +150,10 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
                 handlePlayerBulletCollision(bullet, enemies);
             }
         }
-        for (bullet = 0; bullet < enemyBullets.length; bullet++) {
-            if (enemyBullets[bullet].alive) {
-                if (enemyBullets[bullet].x >= playerPos.x - 13 && enemyBullets[bullet].x <= playerPos.x + Character.ship.player.width) {
-                    if (enemyBullets[bullet].y >= playerPos.y - Character.ship.player.height / 2 && enemyBullets[bullet].y <= playerPos.y + Character.ship.player.height / 2) {
-                        if (!Game.muteSFX) {
-                            Sounds.playerHit.play();
-                        }
-                        enemyBullets[bullet].alive = false;
-                        Character.ship.player.hp -= enemyBullets[bullet].damage;
-                        if (Character.ship.player.hp <= 0) {
-                            if (!Game.muteSFX) {
-                                Sounds.explosion.play();
-                            }
-                            GameLogic.gameOver();
-                        }
-                    }
-                }
+
+        for (let bullet of enemyBullets) {
+            if (bullet.alive) {
+                handleEnemyBulletCollision(bullet, playerPos);
             }
         }
     };
