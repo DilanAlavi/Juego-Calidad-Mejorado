@@ -255,9 +255,9 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
         }
     };
 
-    var gameOver = function gameOver() {
-        var isHighscore = false;
-        var enemies = InPlay.enemies;
+    const gameOver = function gameOver() {
+        let isHighscore = false;
+        let enemies = InPlay.enemies;
         GameLogic.timer.stop();
         enemies.length = 0;
         Game.levelStarted = false;
@@ -270,7 +270,7 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
         Game.screen = "game_over";
     };
 
-    var uploadStats = function uploadStats(isHighscore) {
+    const uploadStats = function uploadStats(isHighscore) {
         if (isHighscore) {
             LSM.set("highscore", Game.highscore);
             Game.isHighscore = true;
@@ -284,7 +284,7 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
         LSM.set("transport", Game.transport);
     };
 
-    var resetStats = function resetStats() {
+    const resetStats = function resetStats() {
         Game.highscore = 0;
         Game.scout = 0;
         Game.fighter = 0;
@@ -299,14 +299,14 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
         LSM.set("transport", 0);
     };
 
-    var checkCollisions = function checkCollisions() {
+    const checkCollisions = function checkCollisions() {
         GameLogic.checkShipCollision();
         GameLogic.checkBulletCollision();
         GameLogic.checkEnemiesDead();
         GameLogic.checkPickUp();
     };
 
-    var spawnCheck = function spawnCheck(newShip, spawnTime) {
+    const spawnCheck = function spawnCheck(newShip, spawnTime) {
         var i, enemies, spawningY, verdict, time;
         verdict = true;
         time = spawnTime;
@@ -324,8 +324,8 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
         return verdict;
     };
 
-    var addEnemies = function addEnemies() {
-        var i, enemy, x, y, noEnemies, rate, selector, lvlSelector;
+    const addEnemies = function addEnemies() {
+        let i, enemy, x, y, noEnemies, rate, selector, lvlSelector;
         noEnemies = Game.level * 5;
         if (Game.level <= 5) {
             lvlSelector = Game.level;
@@ -337,7 +337,7 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
         } else {
             rate = 0.5;
         }
-        var time = 0;
+        let time = 0;
         GameLogic.level.startTime = Game.timer;
         for (i = 0; i < noEnemies; i++) {
             selector = Math.floor(Math.random() * (lvlSelector - 1 + 1) + 1);
@@ -371,14 +371,14 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
         }
     };
 
-    var level = {
+    const level = {
         //functions
         start: startLevel,
         //variables
         startTime: 0
     };
 
-    var GameLogic = {
+    const GameLogic = {
         //functions
         clone: clone,
         spawnCheck: spawnCheck,
