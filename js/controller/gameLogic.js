@@ -4,7 +4,7 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
         Game.timer = 0;
     };
 
-    var clone = (function () {
+    const clone = (function () {
         return function (obj) {
             Clone.prototype = obj;
             return new Clone();
@@ -13,11 +13,11 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
         function Clone() {}
     }());
 
-    var startTimer = function startTimer() {
-        timerInterval = setInterval(function () {
+    const startTimer = function startTimer() {
+        const timerInterval = setInterval(function () {
             if (Game.levelStarted) {
-                Game.timer += 0.01;
-                GameLogic.addScore(2);
+                Game.timer += 0.01;  
+                GameLogic.addScore(2);  
             }
         }, 10);
     };
@@ -179,7 +179,7 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
         InPlay.powerUps.push(pickUp);
     };
 
-    var checkPickUp = function checkPickUp() {
+    const checkPickUp = function checkPickUp() {
         var powerUps = InPlay.powerUps;
         var player = Character.ship.player;
         var i;
