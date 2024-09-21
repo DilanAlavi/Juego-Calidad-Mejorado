@@ -226,7 +226,6 @@ define(["model/game", "model/canvas", "model/character", "model/images", "model/
 
         const playerShoot = function playerShoot() {
             if (Game.screen === "game") {
-                const upgrade = Character.ship.player.upgrade;
                 if (!Game.muteSFX) {
                     Sounds.laser1.play();
                 }
