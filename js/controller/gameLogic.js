@@ -1,6 +1,6 @@
 define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/sounds", "model/images", "controller/localStorageManager"], function (Game, Character, InPlay, Canvas, Sounds, Images, LSM) {
     let timerInterval;
-    var resetTimer = function resetTimer() {
+    const resetTimer = function resetTimer() {
         Game.timer = 0;
     };
 
