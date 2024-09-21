@@ -1,34 +1,24 @@
 define(["model/game"], function (Game) {
-    var init = function init() {
+    const init = function init() {
         if (typeof (Storage) !== "undefined") {
-            if (localStorage.getItem("music") === null) {
-                localStorage.setItem("music", "true");
-            }
-            if (localStorage.getItem("sfx") === null) {
-                localStorage.setItem("sfx", "true");
-            }
-            if (localStorage.getItem("scout") === null) {
-                localStorage.setItem("scout", "0");
-            }
-            if (localStorage.getItem("fighter") === null) {
-                localStorage.setItem("fighter", "0");
-            }
-            if (localStorage.getItem("interceptor") === null) {
-                localStorage.setItem("interceptor", "0");
-            }
-            if (localStorage.getItem("tank") === null) {
-                localStorage.setItem("tank", "0");
-            }
-            if (localStorage.getItem("transport") === null) {
-                localStorage.setItem("transport", "0");
-            }
-            if (localStorage.getItem("highscore") === null) {
-                localStorage.setItem("highscore", "0");
-            }
+            const initializeStorageItem = (key, defaultValue) => {
+                if (localStorage.getItem(key) === null) {
+                    localStorage.setItem(key, defaultValue);
+                }
+            };
+    
+            initializeStorageItem("music", "true");
+            initializeStorageItem("sfx", "true");
+            initializeStorageItem("scout", "0");
+            initializeStorageItem("fighter", "0");
+            initializeStorageItem("interceptor", "0"); 
+            initializeStorageItem("tank", "0");
+            initializeStorageItem("transport", "0");
+            initializeStorageItem("highscore", "0");
         } else {
-            console.log("nolocalstorage sup"); //TODO
+            console.log("No local storage support");
         }
-    };
+    };    
 
     var load = function load() {
         if (localStorage.getItem("music") === "true") {

@@ -23,8 +23,6 @@ define(["model/game", "model/canvas", "model/character", "model/images", "model/
             context = canvas.getContext("2d");
             context.canvas.width = window.innerWidth;
             context.canvas.height = window.innerHeight - 70;
-            let canvasWidth = canvas.width;
-            let canvasHeight = canvas.height;
         };
 
         function checkButtonAction(down, kb, action) {
