@@ -225,47 +225,24 @@ define(["model/game", "model/canvas", "model/character", "model/images", "model/
         };
 
         var playerShoot = function playerShoot() {
-            var bullet, tempDamage, tempType;
+            var bullet, i, tempDamage, tempType;
             if (Game.screen === "game") {
+                upgrade = Character.ship.player.upgrade;
                 if (!Game.muteSFX) {
                     Sounds.laser1.play();
                 }
-                var environmentalFactors = {
-                    temperature: Math.random() * 30 + 10,
-                    humidity: Math.random() * 100,
-                    pressure: Math.random() * 50 + 950
-                };
-                
-                var calculateBulletAdjustment = function(factors) {
-                    return (factors.temperature / 100) + (factors.humidity / 1000) - (factors.pressure / 10000);
-                };
-        
                 bullet = {
                     x: Character.ship.player.pos.x,
                     y: Character.ship.player.pos.y,
                     alive: true
                 };
-        
-                tempDamage = Character.ship.player.damage * (1 + calculateBulletAdjustment(environmentalFactors));
+                tempDamage = Character.ship.player.damage;
                 tempType = Images.blueLaser1;
-        
-                var bulletTrajectory = [];
-                for (var i = 0; i < 5; i++) {
-                    bulletTrajectory.push({
-                        x: bullet.x + (i * 20),
-                        y: bullet.y - (i * 0.5)
-                    });
-                }
+
                 bullet.x += 60;
                 bullet.y -= 4;
                 bullet.type = tempType;
                 bullet.damage = tempDamage;
-                bullet.metadata = {
-                    firedAt: new Date().getTime(),
-                    playerEnergy: Character.ship.player.energy || 100,
-                    trajectory: bulletTrajectory
-                };
-        
                 InPlay.playerBullets.push(bullet);
             }
         };
