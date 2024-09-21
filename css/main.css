@@ -46,26 +46,32 @@ padding:0 30px;
 font-size:1.1em;
 }
 
-nav#buttons a{
-	display: inline-block;
-	color: white;
-	font-family:sans-serif;
-	letter-spacing:0.035em;
-	text-shadow: 0px -1px 0px #b1b1b1;
-	padding:2px 100px;
-	background:#136caa; /*for unsupported browsers*/
-	background: -webkit-linear-gradient(top, #136caa, #4f98cb);
-	background: -moz-linear-gradient(top, #136caa, #4f98cb);
-	background: -o-linear-gradient(top, #136caa, #4f98cb);
-	background: -ms-linear-gradient(top, #136caa, #4f98cb);
-	background: linear-gradient(top, #136caa, #4f98cb);
+nav#buttons a {
+    display: inline-block;
+    color: white;
+    font-family: sans-serif;
+    letter-spacing: 0.035em;
+    text-shadow: 0px -1px 0px #b1b1b1;
+    padding: 2px 100px;
+    background: #136caa; /* Fallback for unsupported browsers */
+    background: linear-gradient(to bottom, #136caa, #4f98cb);
 
-	/*add a drop shadow to the button*/
-	-webkit-box-shadow: rgba(93, 100, 106, .75) 0 1px 10px;
-	-moz-box-shadow: rgba(93, 100, 106, .75) 0 1px 10px;
-	box-shadow: rgba(93, 100, 106, .75) 0 1px 10px;
+    /* Modern syntax for box shadow */
+    box-shadow: 0 1px 10px rgba(93, 100, 106, 0.75);
 }
 
+/* If you need to support older browsers, you can add these prefixed versions */
+@supports (-webkit-appearance:none) {
+    nav#buttons a {
+        background: -webkit-linear-gradient(top, #136caa, #4f98cb);
+    }
+}
+
+@supports (-moz-appearance:none) {
+    nav#buttons a {
+        background: -moz-linear-gradient(top, #136caa, #4f98cb);
+    }
+}
 nav#buttons a:hover, nav#buttons a:focus{
 	color:#e0e0d5;
 	text-shadow:none;
