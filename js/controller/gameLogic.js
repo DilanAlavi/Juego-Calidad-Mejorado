@@ -14,7 +14,7 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
     }());
 
     const startTimer = function startTimer() {
-        const timerInterval = setInterval(function () {
+        setInterval(function () {
             if (Game.levelStarted) {
                 Game.timer += 0.01;  
                 GameLogic.addScore(2);  
@@ -199,28 +199,17 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
         }
     };
 
-    const checkPickUp = function checkPickUp() {
+    const checkPickUp = function() {
         const powerUps = InPlay.powerUps;
         const player = Character.ship.player;
-        var i;
-        for (i = 0; i < powerUps.length; i++) {
-            if (powerUps[i].alive) {
-                if (powerUps[i].x >= player.pos.x && powerUps[i].x <= (player.pos.x + player.width)) {
-                    if (powerUps[i].y >= (player.pos.y - player.height) && powerUps[i].y <= player.pos.y + player.height / 2) {
-                        if (!Game.muteSFX) {
-                            Sounds.powerUp.play();
-                        }
-                        if (powerUps[i].type === "health") {
-                            player.hp += 20;
-                        } else if (powerUps[i].type === "fireRate") {
-                            player.fireRate -= 0.09;
-							GameLogic.fRate = true;
-                        } else if (powerUps[i].type === "damage") {
-                            player.damage += 1;
-                        }
-                        powerUps[i].alive = false;
-                    }
+    
+        for (let i = 0; i < powerUps.length; i++) {
+            if (powerUps[i].alive && isInPickupArea(powerUps[i], player)) {
+                if (!Game.muteSFX) {
+                    Sounds.powerUp.play();
                 }
+                applyPowerUp(powerUps[i], player);
+                powerUps[i].alive = false;
             }
         }
     };
