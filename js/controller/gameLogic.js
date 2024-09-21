@@ -22,26 +22,26 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
         }, 10);
     };
 
-    var addScore = function addScore(add) {
+    const addScore = function addScore(add) {
         Character.ship.player.score += add;
     };
 
-    var stopTimer = function stopTimer() {
+    const stopTimer = function stopTimer() {
         clearInterval(timerInterval);
     };
 
-    var getTimer = function getTimer() {
+    const getTimer = function getTimer() {
         return Game.timer;
     };
 
-    var timer = {
+    const timer = {
         reset: resetTimer,
         start: startTimer,
         stop: stopTimer,
         get: getTimer
     };
 
-    var startLevel = function startLevel() {
+    const startLevel = function startLevel() {
         setTimeout(function () {
             if (!Game.muteSFX) {
                 Sounds.levelUp.play();
@@ -52,7 +52,7 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
         }, 3000);
     };
 
-    var checkEnemiesDead = function checkEnemiesDead() {
+    const checkEnemiesDead = function checkEnemiesDead() {
         var alive = 0;
         var enemies = InPlay.enemies;
         var i;
