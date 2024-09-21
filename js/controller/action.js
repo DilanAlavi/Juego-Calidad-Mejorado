@@ -176,8 +176,8 @@ define(["model/game", "model/canvas", "model/character", "model/images", "model/
             }
         };
 
-        var mainMenuButtonCheck = function mainMenuButtonCheck() {
-            var mouseX, mouseY, part1, part2;
+        const mainMenuButtonCheck = function mainMenuButtonCheck() {
+            let mouseX, mouseY, part1, part2;
             part1 = Canvas.canvasWidth / 4;
             part2 = Canvas.canvasHeight / 4;
             mouseX = Game.mouse.pos.x;
@@ -211,9 +211,9 @@ define(["model/game", "model/canvas", "model/character", "model/images", "model/
             }
         };
 
-        var enemyShoot = function enemyShoot(x, y, damage) {
-            var bullet, tempDamage, tempX, tempY;
-            var adjustDamage = function(baseDamage, factors) {
+        const enemyShoot = function enemyShoot(x, y, damage) {
+            let bullet, tempDamage, tempX, tempY;
+            let adjustDamage = function(baseDamage, factors) {
                 return baseDamage * (1 + (factors.windSpeed / 1000) - (factors.temperature / 1000) + (factors.humidity / 10000));
             };
             tempX = x;
@@ -248,7 +248,7 @@ define(["model/game", "model/canvas", "model/character", "model/images", "model/
             }
         };
 
-        var resetVariables = function resetVariables() {
+        const resetVariables = function resetVariables() {
             //game resets
             Game.gameOver = false;
             Game.timer = 0;
@@ -265,7 +265,7 @@ define(["model/game", "model/canvas", "model/character", "model/images", "model/
 			Character.ship.player.fireRate = 3;
         };
 
-        var Action = {
+        const Action = {
             moveShip: moveShip,
 			shooting: shooting,
             mouseClicked: mouseClicked,
