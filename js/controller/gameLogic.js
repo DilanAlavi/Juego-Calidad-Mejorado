@@ -72,6 +72,33 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
         }
     };
 
+    const handleEnemyDeath = function(enemy) {
+        if (!Game.muteSFX) {
+            Sounds.death.play();
+        }
+        enemy.alive = false;
+        GameLogic.addScore(enemy.score);
+    
+        switch (enemy.name) {
+            case "transport":
+                GameLogic.dropPickUp(enemy.x, enemy.y);
+                Game.transport += 1;
+                break;
+            case "scout":
+                Game.scout += 1;
+                break;
+            case "fighter":
+                Game.fighter += 1;
+                break;
+            case "interceptor":
+                Game.interceptor += 1;
+                break;
+            case "tank":
+                Game.tank += 1;
+                break;
+        }
+    };
+
     const checkBulletCollision = function checkBulletCollision() {
         let bullet; 
         let ship;
@@ -88,27 +115,7 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
                                 playerBullets[bullet].alive = false;
                                 enemies[ship].hp -= playerBullets[bullet].damage;
                                 if (enemies[ship].hp <= 0) {
-                                    if (!Game.muteSFX) {
-                                        Sounds.death.play();
-                                    }
-                                    enemies[ship].alive = false;
-                                    GameLogic.addScore(enemies[ship].score);
-                                    if (enemies[ship].name === "transport") {
-                                        GameLogic.dropPickUp(enemies[ship].x, enemies[ship].y);
-                                        Game.transport += 1;
-                                    }
-                                    if (enemies[ship].name === "scout") {
-                                        Game.scout += 1;
-                                    }
-                                    if (enemies[ship].name === "fighter") {
-                                        Game.fighter += 1;
-                                    }
-                                    if (enemies[ship].name === "interceptor") {
-                                        Game.interceptor += 1;
-                                    }
-                                    if (enemies[ship].name === "tank") {
-                                        Game.tank += 1;
-                                    }
+                                   handleEnemyDeath(enemies[ship]);
                                 }
                             }
                         }
