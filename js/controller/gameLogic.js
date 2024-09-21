@@ -72,6 +72,25 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
         }
     };
 
+    const handlePlayerBulletCollision = function(bullet, enemies) {
+        for (let ship = 0; ship < enemies.length; ship++) {
+            if (enemies[ship].alive) {
+                if (
+                    bullet.x >= enemies[ship].x &&
+                    bullet.x <= enemies[ship].x + enemies[ship].width &&
+                    bullet.y >= (enemies[ship].y - 9) &&
+                    bullet.y <= enemies[ship].y + enemies[ship].height
+                ) {
+                    bullet.alive = false;
+                    enemies[ship].hp -= bullet.damage;
+                    if (enemies[ship].hp <= 0) {
+                        handleEnemyDeath(enemies[ship]);
+                    }
+                }
+            }
+        }
+    };
+
     const handleEnemyDeath = function(enemy) {
         if (!Game.muteSFX) {
             Sounds.death.play();
@@ -100,27 +119,13 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
     };
 
     const checkBulletCollision = function checkBulletCollision() {
-        let bullet; 
-        let ship;
         const enemyBullets = InPlay.enemyBullets;
         const playerPos = Character.ship.player.pos;
         const playerBullets = InPlay.playerBullets;
         const enemies = InPlay.enemies;
-        for (bullet = 0; bullet < playerBullets.length; bullet++) {
-            if (playerBullets[bullet].alive) {
-                for (ship = 0; ship < enemies.length; ship++) {
-                    if (enemies[ship].alive) {
-                        if (playerBullets[bullet].x >= enemies[ship].x && playerBullets[bullet].x <= enemies[ship].x + enemies[ship].width) {
-                            if (playerBullets[bullet].y >= (enemies[ship].y - 9) && playerBullets[bullet].y <= enemies[ship].y + enemies[ship].height) {
-                                playerBullets[bullet].alive = false;
-                                enemies[ship].hp -= playerBullets[bullet].damage;
-                                if (enemies[ship].hp <= 0) {
-                                   handleEnemyDeath(enemies[ship]);
-                                }
-                            }
-                        }
-                    }
-                }
+        for (let bullet of playerBullets) {
+            if (bullet.alive) {
+                handlePlayerBulletCollision(bullet, enemies);
             }
         }
         for (bullet = 0; bullet < enemyBullets.length; bullet++) {
