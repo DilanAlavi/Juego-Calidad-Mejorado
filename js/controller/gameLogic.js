@@ -179,9 +179,14 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
         InPlay.powerUps.push(pickUp);
     };
 
+    const isInPickupArea = (powerUp, player) => {
+        return (powerUp.x >= player.pos.x && powerUp.x <= (player.pos.x + player.width)) &&
+               (powerUp.y >= (player.pos.y - player.height) && powerUp.y <= player.pos.y + player.height / 2);
+    };
+
     const checkPickUp = function checkPickUp() {
-        var powerUps = InPlay.powerUps;
-        var player = Character.ship.player;
+        const powerUps = InPlay.powerUps;
+        const player = Character.ship.player;
         var i;
         for (i = 0; i < powerUps.length; i++) {
             if (powerUps[i].alive) {
