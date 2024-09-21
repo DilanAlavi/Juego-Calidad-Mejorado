@@ -224,25 +224,19 @@ define(["model/game", "model/canvas", "model/character", "model/images", "model/
             InPlay.enemyBullets.push(bullet);
         };
 
-        var playerShoot = function playerShoot() {
-            var bullet, i, tempDamage, tempType;
+        const playerShoot = function playerShoot() {
             if (Game.screen === "game") {
-                upgrade = Character.ship.player.upgrade;
+                const upgrade = Character.ship.player.upgrade;
                 if (!Game.muteSFX) {
                     Sounds.laser1.play();
                 }
-                bullet = {
-                    x: Character.ship.player.pos.x,
-                    y: Character.ship.player.pos.y,
-                    alive: true
+                const bullet = {
+                    x: Character.ship.player.pos.x + 60,
+                    y: Character.ship.player.pos.y - 4,
+                    alive: true,
+                    type: Images.blueLaser1,
+                    damage: Character.ship.player.damage
                 };
-                tempDamage = Character.ship.player.damage;
-                tempType = Images.blueLaser1;
-
-                bullet.x += 60;
-                bullet.y -= 4;
-                bullet.type = tempType;
-                bullet.damage = tempDamage;
                 InPlay.playerBullets.push(bullet);
             }
         };
