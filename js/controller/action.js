@@ -1,7 +1,7 @@
 define(["model/game", "model/canvas", "model/character", "model/images", "model/inPlay", "controller/gameLogic", "model/sounds", "controller/localStorageManager"],
     function (Game, Canvas, Character, Images, InPlay, GameLogic, Sounds, LSM) {
-        var shooting;
-        var getMousePos = function getMousePos(evt) {
+        let shooting;
+        const getMousePos = function getMousePos(evt) {
             Game.keyboard.use = false;
             Game.mouse.use = true;
             var rect = Canvas.canvas.getBoundingClientRect();
@@ -13,7 +13,7 @@ define(["model/game", "model/canvas", "model/character", "model/images", "model/
             }
         };
 
-        var resize = function resize() {
+        const resize = function resize() {
             Canvas.contextCanvasWidth = window.innerWidth;
             Canvas.contextCanvasHeight = window.innerHeight - 70;
             Canvas.canvasWidth = Canvas.canvas.width;
