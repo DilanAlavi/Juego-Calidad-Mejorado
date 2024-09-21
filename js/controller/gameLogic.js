@@ -203,17 +203,17 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
         const powerUps = InPlay.powerUps;
         const player = Character.ship.player;
     
-        for (let i = 0; i < powerUps.length; i++) {
-            if (powerUps[i].alive && isInPickupArea(powerUps[i], player)) {
+        for (const powerUp of powerUps) {
+            if (powerUp.alive && isInPickupArea(powerUp, player)) {
                 if (!Game.muteSFX) {
                     Sounds.powerUp.play();
                 }
-                applyPowerUp(powerUps[i], player);
-                powerUps[i].alive = false;
+                applyPowerUp(powerUp, player);
+                powerUp.alive = false;
             }
         }
     };
-
+    
     const checkShipCollision = function checkShipCollision() {
         let enemies = InPlay.enemies;
         let player = Character.ship.player;
