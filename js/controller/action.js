@@ -4,7 +4,7 @@ define(["model/game", "model/canvas", "model/character", "model/images", "model/
         const getMousePos = function getMousePos(evt) {
             Game.keyboard.use = false;
             Game.mouse.use = true;
-            var rect = Canvas.canvas.getBoundingClientRect();
+            const rect = Canvas.canvas.getBoundingClientRect();
             Game.mouse.pos.x = evt.clientX - rect.left;
             Game.mouse.pos.y = evt.clientY - rect.top;
             Character.ship.player.pos.y = Game.mouse.pos.y;
@@ -18,6 +18,7 @@ define(["model/game", "model/canvas", "model/character", "model/images", "model/
             Canvas.contextCanvasHeight = window.innerHeight - 70;
             Canvas.canvasWidth = Canvas.canvas.width;
             Canvas.canvasHeight = Canvas.canvas.height;
+
             canvas = document.getElementById("gameCanvas");
             context = canvas.getContext("2d");
             context.canvas.width = window.innerWidth;
