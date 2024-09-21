@@ -104,50 +104,59 @@ define(["model/game", "model/canvas", "model/character", "model/images", "model/
             }
         };
 
-        var optionsButtonCheck = function optionsButtonCheck() {
-            var mouseX, mouseY, part1, part2;
-            part1 = Canvas.canvasWidth / 4;
-            part2 = Canvas.canvasHeight / 4;
-            mouseX = Game.mouse.pos.x;
-            mouseY = Game.mouse.pos.y;
-            if (mouseX >= part1 * 1.2 && mouseX <= part1 * 1.2 + part1 * 0.75 && mouseY >= part2 && mouseY <= part2 + part2 * 0.7) {
-                if (!Game.muteSFX) {
-                    Sounds.select.play();
-                }
-                if (Game.muteMusic === false) {
-                    Game.muteMusic = true;
-                    LSM.set("music", "false");
-                    Sounds.bgMusic.mute();
-                } else {
-                    if (!Game.musicCreated) {
-                        Sounds.bgMusic.play();
-                        Game.musicCreated = true;
-                    }
-                    Sounds.bgMusic.unmute();
-                    Game.muteMusic = false;
-                    LSM.set("music", "true");
-                }
-            }
-            if (mouseX >= part1 * 2.1 && mouseX <= part1 * 2.1 + part1 * 0.75 && mouseY >= part2 && mouseY <= part2 + part2 * 0.7) {
-                if (!Game.muteSFX) {
-                    Sounds.select.play();
-                }
-                if (Game.muteSFX === false) {
-                    Game.muteSFX = true;
-                    LSM.set("sfx", "false");
-                } else {
-                    Game.muteSFX = false;
-                    LSM.set("sfx", "true");
-                }
-            }
-            if (mouseX >= part1 * 2.1 && mouseX <= part1 * 2.1 + part1 * 0.75 && mouseY >= part2 * 2 && mouseY <= part2 * 2 + part2 * 0.7) {
-                if (!Game.muteSFX) {
-                    Sounds.select.play();
-                }
-                Game.screen = "main_menu";
-            }
+        const isMouseInBounds = (mouseX, mouseY, xStart, xEnd, yStart, yEnd) => {
+            return (mouseX >= xStart && mouseX <= xEnd && mouseY >= yStart && mouseY <= yEnd);
         };
 
+        const handleMusicToggle = () => {
+            if (!Game.muteSFX) Sounds.select.play();
+            
+            if (Game.muteMusic === false) {
+                Game.muteMusic = true;
+                LSM.set("music", "false");
+                Sounds.bgMusic.mute();
+            } else {
+                if (!Game.musicCreated) {
+                    Sounds.bgMusic.play();
+                    Game.musicCreated = true;
+                }
+                Sounds.bgMusic.unmute();
+                Game.muteMusic = false;
+                LSM.set("music", "true");
+            }
+        };
+        
+        const handleSFXToggle = () => {
+            if (!Game.muteSFX) Sounds.select.play();
+            
+            Game.muteSFX = !Game.muteSFX;
+            LSM.set("sfx", Game.muteSFX ? "false" : "true");
+        };
+        
+        const goToMainMenu = () => {
+            if (!Game.muteSFX) Sounds.select.play();
+            Game.screen = "main_menu";
+        };
+        
+        const optionsButtonCheck = function optionsButtonCheck() {
+            const part1 = Canvas.canvasWidth / 4;
+            const part2 = Canvas.canvasHeight / 4;
+            const mouseX = Game.mouse.pos.x;
+            const mouseY = Game.mouse.pos.y;
+        
+            if (isMouseInBounds(mouseX, mouseY, part1 * 1.2, part1 * 1.2 + part1 * 0.75, part2, part2 + part2 * 0.7)) {
+                handleMusicToggle();
+            }
+            
+            if (isMouseInBounds(mouseX, mouseY, part1 * 2.1, part1 * 2.1 + part1 * 0.75, part2, part2 + part2 * 0.7)) {
+                handleSFXToggle();
+            }
+            
+            if (isMouseInBounds(mouseX, mouseY, part1 * 2.1, part1 * 2.1 + part1 * 0.75, part2 * 2, part2 * 2 + part2 * 0.7)) {
+                goToMainMenu();
+            }
+        };
+        
         var statsButtonCheck = function statsButtonCheck() {
             var mouseX, mouseY, part1, part2;
             part1 = Canvas.canvasWidth / 4;
