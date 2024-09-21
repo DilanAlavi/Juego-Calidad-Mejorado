@@ -19,12 +19,12 @@ define(["model/game", "model/canvas", "model/character", "model/images", "model/
             Canvas.canvasWidth = Canvas.canvas.width;
             Canvas.canvasHeight = Canvas.canvas.height;
 
-            canvas = document.getElementById("gameCanvas");
+            let canvas = document.getElementById("gameCanvas");
             context = canvas.getContext("2d");
             context.canvas.width = window.innerWidth;
             context.canvas.height = window.innerHeight - 70;
-            canvasWidth = canvas.width;
-            canvasHeight = canvas.height;
+            let canvasWidth = canvas.width;
+            let canvasHeight = canvas.height;
         };
 
         function checkButtonAction(down, kb, action) {
@@ -83,8 +83,8 @@ define(["model/game", "model/canvas", "model/character", "model/images", "model/
             }
         };
 
-        var gameOverButtonCheck = function gameOverButtonCheck() {
-            var mouseX, mouseY, part1, part2;
+        const gameOverButtonCheck = function gameOverButtonCheck() {
+            let mouseX, mouseY, part1, part2;
             part1 = Canvas.canvasWidth / 4;
             part2 = Canvas.canvasHeight / 4;
             mouseX = Game.mouse.pos.x;
