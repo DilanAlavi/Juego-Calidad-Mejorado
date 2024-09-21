@@ -72,12 +72,13 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
         }
     };
 
-    var checkBulletCollision = function checkBulletCollision() {
-        var bullet, ship;
-        var enemyBullets = InPlay.enemyBullets;
-        var playerPos = Character.ship.player.pos;
-        var playerBullets = InPlay.playerBullets;
-        var enemies = InPlay.enemies;
+    const checkBulletCollision = function checkBulletCollision() {
+        let bullet; 
+        let ship;
+        const enemyBullets = InPlay.enemyBullets;
+        const playerPos = Character.ship.player.pos;
+        const playerBullets = InPlay.playerBullets;
+        const enemies = InPlay.enemies;
         for (bullet = 0; bullet < playerBullets.length; bullet++) {
             if (playerBullets[bullet].alive) {
                 for (ship = 0; ship < enemies.length; ship++) {
