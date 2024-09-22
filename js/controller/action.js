@@ -239,7 +239,9 @@ define(["model/game", "model/canvas", "model/character", "model/images", "model/
             InPlay.enemyBullets.push(bullet);
         };
         
-
+        function adjustDamage(baseDamage, factors) {
+            return baseDamage * (1 + (factors.windSpeed / 1000) - (factors.temperature / 1000) + (factors.humidity / 10000));
+        }
         const playerShoot = function playerShoot() {
             if (Game.screen === "game") {
                 if (!Game.muteSFX) {
