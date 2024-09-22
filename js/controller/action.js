@@ -221,27 +221,24 @@ define(["model/game", "model/canvas", "model/character", "model/images", "model/
                 }
             }
         }
-
-        const enemyShoot = function enemyShoot(x, y, damage) {
-            let bullet, tempDamage, tempX, tempY;
-            let adjustDamage = function(baseDamage, factors) {
-                return baseDamage * (1 + (factors.windSpeed / 1000) - (factors.temperature / 1000) + (factors.humidity / 10000));
-            };
-            tempX = x;
-            tempY = y;
-            tempDamage = damage;
+        const enemyShoot = function enemyShoot(x, y, baseDamage, environmentalFactors) {
             if (!Game.muteSFX) {
                 Sounds.laser2.play();
             }
-            bullet = {
-                x: tempX,
-                y: tempY + 52,
-                damage: tempDamage,
+        
+            const adjustedDamage = adjustDamage(baseDamage, environmentalFactors);
+        
+            const bullet = {
+                x: x,
+                y: y + 52,
+                damage: adjustedDamage,
                 alive: true,
                 type: Images.redLaser1
             };
+        
             InPlay.enemyBullets.push(bullet);
         };
+        
 
         const playerShoot = function playerShoot() {
             if (Game.screen === "game") {
