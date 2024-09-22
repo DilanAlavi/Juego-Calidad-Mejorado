@@ -373,8 +373,7 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
     function spawnEnemy(enemy, y, time) {
         enemy.y = y;
         enemy.x = Canvas.canvasWidth + 100;
-        
-        // Ajuste de HP basado en el nivel, pero con un crecimiento más controlado
+
         const hpIncrease = Math.floor(Math.sqrt(Game.level)) - 1;
         enemy.hp += Math.max(0, hpIncrease);
         
