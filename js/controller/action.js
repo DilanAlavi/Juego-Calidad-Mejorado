@@ -177,39 +177,50 @@ define(["model/game", "model/canvas", "model/character", "model/images", "model/
         };
 
         const mainMenuButtonCheck = function mainMenuButtonCheck() {
-            let mouseX, mouseY, part1, part2;
-            part1 = Canvas.canvasWidth / 4;
-            part2 = Canvas.canvasHeight / 4;
-            mouseX = Game.mouse.pos.x;
-            mouseY = Game.mouse.pos.y;
-            if (mouseX >= part1 * 1.2 && mouseX <= part1 * 1.2 + part1 * 0.75 && mouseY >= part2 && mouseY <= part2 + part2 * 0.7) {
-                if (!Game.muteSFX) {
-                    Sounds.select.play();
-                }
+            const part1 = Canvas.canvasWidth / 4;
+            const part2 = Canvas.canvasHeight / 4;
+            const mouseX = Game.mouse.pos.x;
+            const mouseY = Game.mouse.pos.y;
+        
+            checkButtonAndExecute(1.2, 1, () => {
                 Game.screen = "game";
                 Action.resetVariables();
                 GameLogic.level.start();
-            }
-            if (mouseX >= part1 * 2.1 && mouseX <= part1 * 2.1 + part1 * 0.75 && mouseY >= part2 && mouseY <= part2 + part2 * 0.7) {
-                if (!Game.muteSFX) {
-                    Sounds.select.play();
-                }
+            });
+        
+            checkButtonAndExecute(2.1, 1, () => {
                 Game.screen = "options";
-            }
-            if (mouseX >= part1 * 1.2 && mouseX <= part1 * 1.2 + part1 * 0.75 && mouseY >= part2 * 2 && mouseY <= part2 * 2 + part2 * 0.7) {
-                if (!Game.muteSFX) {
-                    Sounds.select.play();
-                }
+            });
+        
+            checkButtonAndExecute(1.2, 2, () => {
                 Game.screen = "stats";
-            }
-            if (mouseX >= part1 * 2.1 && mouseX <= part1 * 2.1 + part1 * 0.75 && mouseY >= part2 * 2 && mouseY <= part2 * 2 + part2 * 0.7) {
-                if (!Game.muteSFX) {
-                    Sounds.select.play();
-                }
+            });
+        
+            checkButtonAndExecute(2.1, 2, () => {
                 Game.screen = "paused";
                 Game.paused = true;
+            });
+        
+            function checkButtonAndExecute(xMultiplier, yMultiplier, action) {
+                if (isMouseOverButton(xMultiplier, yMultiplier)) {
+                    playSoundIfEnabled();
+                    action();
+                }
             }
-        };
+        
+            function isMouseOverButton(xMultiplier, yMultiplier) {
+                const x = part1 * xMultiplier;
+                const y = part2 * yMultiplier;
+                return mouseX >= x && mouseX <= x + part1 * 0.75 &&
+                       mouseY >= y && mouseY <= y + part2 * 0.7;
+            }
+        
+            function playSoundIfEnabled() {
+                if (!Game.muteSFX) {
+                    Sounds.select.play();
+                }
+            }
+        }
 
         const enemyShoot = function enemyShoot(x, y, damage) {
             let bullet, tempDamage, tempX, tempY;
