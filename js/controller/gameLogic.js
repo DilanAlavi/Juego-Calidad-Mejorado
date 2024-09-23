@@ -53,9 +53,9 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
     };
 
     const checkEnemiesDead = function checkEnemiesDead() {
-        var alive = 0;
-        var enemies = InPlay.enemies;
-        var i;
+        let alive = 0;
+        let enemies = InPlay.enemies;
+        let i;
         if (enemies.length > 0 && !Game.gameOver) {
             for (i = 0; i < enemies.length; i++) {
                 if (enemies[i].alive) {
