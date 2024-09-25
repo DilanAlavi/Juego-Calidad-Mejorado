@@ -4,15 +4,9 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
         Game.timer = 0;
     };
 
-    const clone = (function () {
-        return function (obj) {
-            Clone.prototype = obj;
-            return new Clone();
-        };
-
-        function Clone() {}
-    }());
-
+const clone = function(obj) {
+    return Object.create(obj);
+};
     const startTimer = function startTimer() {
         setInterval(function () {
             if (Game.levelStarted) {
