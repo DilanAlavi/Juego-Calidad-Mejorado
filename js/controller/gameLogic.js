@@ -329,7 +329,6 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
         const maxEnemies = 30;
         const enemyIncreaseRate = 2; 
     
- 
         const noEnemies = Math.min(baseEnemies + (Game.level - 1) * enemyIncreaseRate, maxEnemies);
         
         const lvlSelector = Math.min(Game.level, 5);
@@ -337,19 +336,18 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
         let time = 0;
         GameLogic.level.startTime = Game.timer;
     
-        for (let i = 0; i < noEnemies; i++) {
+        let enemiesSpawned = 0;
+        while (enemiesSpawned < noEnemies) {
             const enemy = selectEnemy(lvlSelector);
             const y = Math.floor(Math.random() * (Canvas.canvasHeight - 90)) + 1;
             
             if (GameLogic.spawnCheck(y, time)) {
                 spawnEnemy(enemy, y, time);
                 time += rate;
-            } else {
-                i--; 
+                enemiesSpawned++;
             }
         }
     };
-    
     function selectEnemy(lvlSelector) {
         const selector = Math.floor(Math.random() * lvlSelector) + 1;
         const enemyTypes = [
