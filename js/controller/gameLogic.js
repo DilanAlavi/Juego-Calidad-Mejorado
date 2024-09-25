@@ -4,9 +4,9 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
         Game.timer = 0;
     };
 
-const clone = function(obj) {
-    return Object.create(obj);
-};
+    const clone = function(obj) {
+        return Object.create(obj);
+    };
     const startTimer = function startTimer() {
         setInterval(function () {
             if (Game.levelStarted) {
@@ -152,24 +152,25 @@ const clone = function(obj) {
         }
     };
 
-    var dropPickUp = function dropPickUp(x, y) {
-        var selector;
-        selector = Math.floor(Math.random() * (3 - 1 + 1) + 1);
-        var pickUp = {
+    const dropPickUp = function dropPickUp(x, y) {
+        const selector = Math.floor(Math.random() * 3) + 1;
+        const pickUp = {
             x: x,
             y: y + 45,
             alive: true
         };
+    
         if (selector === 1) {
             pickUp.type = "health";
             pickUp.icon = Images.pickUpHealth;
         } else if (selector === 2) {
             pickUp.type = "fireRate";
             pickUp.icon = Images.pickUpFireRate;
-        } else if (selector === 3) {
+        } else {
             pickUp.type = "damage";
             pickUp.icon = Images.pickUpDamage;
         }
+    
         InPlay.powerUps.push(pickUp);
     };
 
