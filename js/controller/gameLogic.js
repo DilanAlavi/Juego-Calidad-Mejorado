@@ -302,7 +302,7 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
     };
 
     const spawnCheck = function spawnCheck(newShip, spawnTime) {
-        var i, enemies, spawningY, verdict, time;
+        let  i, enemies, spawningY, verdict, time;
         verdict = true;
         time = spawnTime;
         spawningY = newShip;
