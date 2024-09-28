@@ -60,7 +60,7 @@ define(["view/draw", "model/game", "controller/gameLogic", "controller/action", 
         }
     };
 
-    var draw = function draw() {
+    const draw = function draw() {
         Draw.drawBackground();
         //Checks which screen user is on
         if (Game.screen === "game") {
