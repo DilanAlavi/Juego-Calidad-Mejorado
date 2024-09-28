@@ -15,7 +15,7 @@ define(["view/draw", "model/game", "controller/gameLogic", "controller/action", 
         }
     };
 
-    var pauseGame = function pauseGame() {
+    const pauseGame = function pauseGame() {
         if (Game.levelStarted || Game.screen === "paused") {
             if (!Game.muteSFX) {
                 Sounds.pause.play();
