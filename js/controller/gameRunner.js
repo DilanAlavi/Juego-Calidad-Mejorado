@@ -1,5 +1,5 @@
 define(["view/draw", "model/game", "controller/gameLogic", "controller/action", "model/canvas", "model/sounds"], function (Draw, Game, GameLogic, Action, Canvas, Sounds) {
-    var gameLoop = function gameLoop() {
+    const gameLoop = function gameLoop() {
         if (window.requestAnimationFrame === undefined) {
 			Canvas.context.fillStyle = "#FFFFFF";
             Canvas.context.fillRect(0, 0, Canvas.canvas.width, Canvas.canvas.height);
