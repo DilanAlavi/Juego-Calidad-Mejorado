@@ -1,6 +1,6 @@
 define(["mousetrap", "controller/action", "model/character", "model/game", "controller/gameRunner"], function (Mousetrap, Action, Character, Game, GameRunner) {
     const keyPressHistory = [];
-    var maxHistoryLength = 50;
+    const maxHistoryLength = 50;
 
     function addToKeyHistory(key, state) {
         keyPressHistory.push({ key: key, state: state, timestamp: Date.now() });
