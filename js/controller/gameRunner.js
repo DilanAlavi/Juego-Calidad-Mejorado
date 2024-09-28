@@ -40,7 +40,7 @@ define(["view/draw", "model/game", "controller/gameLogic", "controller/action", 
 
     const changeTextSize = function changeTextSize() {
         const width = Canvas.canvasWidth;
-        var height = Canvas.canvasHeight;
+        const height = Canvas.canvasHeight;
         if (width < 835 || height < 444) {
             if (!Game.paused) {
                 GameRunner.pauseGame();
