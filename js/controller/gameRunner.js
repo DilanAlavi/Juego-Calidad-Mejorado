@@ -71,7 +71,7 @@ define(["view/draw", "model/game", "controller/gameLogic", "controller/action", 
         }
     };
 
-    var GameRunner = {
+    const GameRunner = {
         pauseGame: pauseGame,
         changeTextSize: changeTextSize,
         gameLoop: gameLoop,
