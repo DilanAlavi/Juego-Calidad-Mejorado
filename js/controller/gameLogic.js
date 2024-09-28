@@ -152,27 +152,40 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
         }
     };
 
-    const dropPickUp = function dropPickUp(x, y) {
-        const selector = Math.floor(Math.random() * 3) + 1;
+        
+    const getRandomInt = (max) => {
+        const array = new Uint32Array(1);
+        window.crypto.getRandomValues(array);
+        return (array[0] % max) + 1; 
+    };
+
+    const dropPickUp = (x, y) => {
+        const selector = getRandomInt(3);
+
         const pickUp = {
             x: x,
             y: y + 45,
             alive: true
         };
-    
-        if (selector === 1) {
-            pickUp.type = "health";
-            pickUp.icon = Images.pickUpHealth;
-        } else if (selector === 2) {
-            pickUp.type = "fireRate";
-            pickUp.icon = Images.pickUpFireRate;
-        } else {
-            pickUp.type = "damage";
-            pickUp.icon = Images.pickUpDamage;
+        switch (selector) {
+            case 1:
+                pickUp.type = "health";
+                pickUp.icon = Images.pickUpHealth;
+                break;
+            case 2:
+                pickUp.type = "fireRate";
+                pickUp.icon = Images.pickUpFireRate;
+                break;
+            case 3:
+                pickUp.type = "damage";
+                pickUp.icon = Images.pickUpDamage;
+                break;
+            default:
+                throw new Error('Selector fuera de rango');
         }
-    
         InPlay.powerUps.push(pickUp);
     };
+
 
     const isInPickupArea = (powerUp, player) => {
         return (powerUp.x >= player.pos.x && powerUp.x <= (player.pos.x + player.width)) &&
