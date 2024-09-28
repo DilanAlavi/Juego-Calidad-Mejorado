@@ -185,8 +185,8 @@ define(["model/images", "model/canvas", "model/game", "model/character", "contro
             var i, relativeTime;
             var enemies = InPlay.enemies;
             var environmentalFactors = {
-                windSpeed: Math.random() * 5,
-                visibility: Math.random() * 0.5 + 0.5
+                windSpeed: Math.random() * 5, // NOSONAR
+                visibility: Math.random() * 0.5 + 0.5 // NOSONAR
             };
         
             function calculateEnemyBehavior(enemy, time) {

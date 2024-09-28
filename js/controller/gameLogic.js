@@ -347,7 +347,7 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
         let enemiesSpawned = 0;
         while (enemiesSpawned < noEnemies) {
             const enemy = selectEnemy(lvlSelector);
-            const y = Math.floor(Math.random() * (Canvas.canvasHeight - 90)) + 1;
+            const y = Math.floor(Math.random() * (Canvas.canvasHeight - 90)) + 1; //NOSONAR
             
             if (GameLogic.spawnCheck(y, time)) {
                 spawnEnemy(enemy, y, time);
@@ -356,8 +356,9 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
             }
         }
     };
+
     function selectEnemy(lvlSelector) {
-        const selector = Math.floor(Math.random() * lvlSelector) + 1;
+        const selector = Math.floor(Math.random() * lvlSelector) + 1; // NOSONAR
         const enemyTypes = [
             Character.ship.enemy.scout,
             Character.ship.enemy.fighter,
@@ -368,8 +369,7 @@ define(["model/game", "model/character", "model/inPlay", "model/canvas", "model/
         
         let selectedEnemy = enemyTypes[selector - 1] || Character.ship.enemy.scout;
         
-        
-        if (Game.level % 3 === 0 && Math.random() < 0.2) { 
+        if (Game.level % 3 === 0 && Math.random() < 0.2) { // NOSONAR
             selectedEnemy = Character.ship.enemy.transport;
         }
         

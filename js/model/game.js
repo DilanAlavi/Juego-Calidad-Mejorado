@@ -1,13 +1,13 @@
 define(["model/canvas"], function (Canvas) {
     var generateStar = function generateStar(old) {
         var star = {
-            y: Math.floor(Math.random() * Canvas.canvasHeight) + 1,
-            speed: Math.floor(Math.random() * 4) + 1
+            y: Math.floor(Math.random() * Canvas.canvasHeight) + 1, // NOSONAR
+            speed: Math.floor(Math.random() * 4) + 1 // NOSONAR
         };
         if (old) {
             star.x = Canvas.canvasWidth;
         } else {
-            star.x = Math.floor(Math.random() * Canvas.canvasWidth) + 1;
+            star.x = Math.floor(Math.random() * Canvas.canvasWidth) + 1; // NOSONAR
         }
         return star;
     };
