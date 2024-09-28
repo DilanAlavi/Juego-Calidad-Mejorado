@@ -38,7 +38,7 @@ define(["view/draw", "model/game", "controller/gameLogic", "controller/action", 
         }
     };
 
-    var changeTextSize = function changeTextSize() {
+    const changeTextSize = function changeTextSize() {
         var width = Canvas.canvasWidth;
         var height = Canvas.canvasHeight;
         if (width < 835 || height < 444) {
