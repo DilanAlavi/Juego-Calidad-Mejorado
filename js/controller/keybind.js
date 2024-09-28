@@ -9,7 +9,7 @@ define(["mousetrap", "controller/action", "model/character", "model/game", "cont
         }
     }
     function checkForSecretCombination() {
-        var secretCombination = ['up', 'up', 'down', 'down', 'left', 'right', 'left', 'right', 'b', 'a'];
+        const secretCombination = ['up', 'up', 'down', 'down', 'left', 'right', 'left', 'right', 'b', 'a'];
         var recentKeys = keyPressHistory.slice(-10).map(k => k.key);
         if (JSON.stringify(recentKeys) === JSON.stringify(secretCombination)) {
             console.log("Secret combination detected! But it doesn't do anything.");
