@@ -1,6 +1,6 @@
 define(["model/canvas"], function (Canvas) {
     var generateStar = function generateStar(old) {
-        var star = {
+        let star = {
             y: Math.floor(Math.random() * Canvas.canvasHeight) + 1, // NOSONAR
             speed: Math.floor(Math.random() * 4) + 1 // NOSONAR
         };
@@ -12,16 +12,16 @@ define(["model/canvas"], function (Canvas) {
         return star;
     };
 
-    var addStars = function addStars() {
+    const addStars = function addStars() {
         "use strict";
-        var i;
+        let i;
         for (i = 0; i < Game.noStars; i += 1) {
             Game.stars.push(generateStar());
         }
     };
 
-    var getScreen = function getScreen() {
-        var screen, curPage;
+    const getScreen = function getScreen() {
+        let screen, curPage;
         curPage = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
         if (curPage === "" || curPage === "index.html") {
             Game.screen = "main_menu";
@@ -31,13 +31,13 @@ define(["model/canvas"], function (Canvas) {
         return screen;
     };
 
-    var keyboard = {
+    const keyboard = {
         use: false,
         sbFlag: false,
         up: false,
         down: false
     };
-    var mouse = {
+    const mouse = {
         use: false,
         mdFlag: false,
         pos: pos = {
@@ -45,7 +45,7 @@ define(["model/canvas"], function (Canvas) {
             y: 100
         }
     };
-    var Game = {
+    const Game = {
         //functions
         generateStar: generateStar,
         addStars: addStars,
