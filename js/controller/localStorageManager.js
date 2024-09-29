@@ -40,14 +40,14 @@ define(["model/game"], function (Game) {
     };
 
     const set = function set(k, v) {
-        var key = String(k);
-        var value = String(v);
+        let key = String(k);
+        let value = String(v);
         localStorage.setItem(key, value);
     };
 
     const get = function get(k) {
-        var key = String(k);
-        var value;
+        let key = String(k);
+        let value;
         value = localStorage.getItem(key);
         return value;
     };
