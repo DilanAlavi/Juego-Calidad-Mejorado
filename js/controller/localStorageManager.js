@@ -20,7 +20,7 @@ define(["model/game"], function (Game) {
         }
     };    
 
-    var load = function load() {
+    const load = function load() {
         if (localStorage.getItem("music") === "true") {
             Game.muteMusic = false;
         } else {
@@ -39,20 +39,20 @@ define(["model/game"], function (Game) {
         Game.transport = parseInt(localStorage.getItem("transport"));
     };
 
-    var set = function set(k, v) {
+    const set = function set(k, v) {
         var key = String(k);
         var value = String(v);
         localStorage.setItem(key, value);
     };
 
-    var get = function get(k) {
+    const get = function get(k) {
         var key = String(k);
         var value;
         value = localStorage.getItem(key);
         return value;
     };
 
-    var LSM = {
+    const LSM = {
         set: set,
         get: get,
         init: init,
